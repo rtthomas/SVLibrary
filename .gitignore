@@ -1,0 +1,9 @@
+# See also client/.gitignore
+*.class
+war/WEB-INF/appengine-generated/
+.project
+.classpath
+.settings/
+build/
+
+
