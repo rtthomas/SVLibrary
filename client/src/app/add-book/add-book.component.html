@@ -1,0 +1,74 @@
+<form class="form-horizontal selectable-component centered" id="add-book" style="width:40em">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      To catalog a book, first select the catalog, then enter a book number. The default value shown is just the next one in sequence
+      after the value of the highest number in the catalog. (If you are cataloging a book which is already in the manual system, you may want
+      to retain the original number.)
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-4" for="xx">Select Catalog:</label>
+      <div class="col-sm-4">
+        <select class="form-control" id="sel1" name="catalog" [(ngModel)]="selectedCatalog" (change)="selectCatalog()" style="width:10em;">
+        <option *ngFor="let c of catalogs">
+          {{c.language}}
+        </option>
+      </select>
+      </div>
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-4" for="id">Book Number:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="id" name="bookNumber" [(ngModel)]="bookNumber" style="width:10em;"><!-- (change)="enableAdd()" -->
+       </div>
+      <div class="col-sm-4">
+        <span style="color:red">{{numberError}}</span>
+     </div>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-offset-4 col-sm-8">
+        <button type="button" id="add-to-catalog" class="btn" name="add" (click)="add()">Add Book to Catalog</button><!-- disabled -->
+      </div>
+    </div>
+  </div>
+  <!-- Upload area visible only after book is registered -->
+  <div id="image-entry" class="panel panel-default" style="display:none;">
+    <div class="panel-body">
+      You can now upload the cover images, then generate a catalog page pdf file. This isn't necessary if the the catalog page already
+      exists for this book.
+      <p style="margin-top: 0.5em">
+        If you don't have the cover images now, you can upload them and generate the pdf later on the "Edit a Catalog" tab. If 
+        you select and upload the wrong image, you can just repeat the operation before downloading the pdf.
+      </p>
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-3" for="upload-front">Front Cover:</label>
+      <div class="col-sm-6">
+        <input type="file" ng2FileSelect [uploader]="uploader"/>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-success btn-xs" (click)="uploadImage('front')">
+            <span class="glyphicon glyphicon-upload"></span> Upload
+          </button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-3" for="upload-front">Back Cover:</label>
+      <div class="col-sm-6">
+        <input type="file" ng2FileSelect [uploader]="uploader" style="display: inline" />
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-success btn-xs" style="display: inline" (click)="uploadImage('back')">
+            <span class="glyphicon glyphicon-upload"></span> Upload
+          </button>
+      </div>
+    </div>
+    <div class="panel-body">
+      Note: There is a short delay between when the images are uploaded and when they can be used to generate the page. If the page is incomplete, just wait half a minute or so, then click the Download button again.
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-offset-4 col-sm-8">
+        <button type="button" id="download" class="btn" name="add" (click)="downloadPdf()" disabled>Download Catalog Page</button>
+      </div>
+    </div>
+  </div>
+</form>

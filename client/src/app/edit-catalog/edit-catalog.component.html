@@ -1,0 +1,87 @@
+<form class="form-horizontal selectable-component centered" id="edit-catalog" style="width:40em">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      On this page, you can upload cover images for a book already registered in the catalog, and generate the catalog page pdf
+      for the book. You can also generate a pdf with all pages of the catalog. If you select and upload the wrong image,
+      you can just repeat the operation
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-4" for="xx">Select Catalog:</label>
+      <div class="col-sm-4">
+        <select class="form-control" id="sel1" name="catalog" [(ngModel)]="selectedCatalog" (change)="selectCatalog()" style="width:10em;">
+        <option *ngFor="let c of catalogs">
+          {{c.language}}
+        </option>
+      </select>
+      </div>
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-4" for="xx">Select Book:</label>
+      <div class="col-sm-4">
+        <select class="form-control" id="sel1" name="book" [(ngModel)]="selectedBook" style="width:10em;">
+        <option *ngFor="let tag of bookTags">
+          {{tag}}
+        </option>
+      </select>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1">
+        <button type="button" id="remove" name="rmove" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" disabled>Remove</button>
+      </div>
+    </div>
+    <!-- Popup dialog for removal confirmation -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Remove Book</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to remove book {{this.bookNumber}} from the catalog?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="removeBook()">Yes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-3" for="upload-front">Front Cover:</label>
+      <div class="col-sm-6">
+        <input type="file" ng2FileSelect [uploader]="uploader" />
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-success btn-xs" (click)="uploadImage('front')">
+            <span class="glyphicon glyphicon-upload"></span> Upload
+          </button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-3" for="upload-front">Back Cover:</label>
+      <div class="col-sm-6">
+        <input type="file" ng2FileSelect [uploader]="uploader" style="display: inline" />
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-success btn-xs" style="display: inline" (click)="uploadImage('back')">
+            <span class="glyphicon glyphicon-upload"></span> Upload
+          </button>
+      </div>
+    </div>
+    <div class="panel-body">
+      Note: If you've uploaded an image, there is a short delay before it it is available for generating the PDF document. 
+      If the page is incomplete, just wait half a minute or so, then click the Download Catalog Page button again.
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-offset-4 col-sm-8">
+        <button type="button" class="btn" id="download" name="download" (click)="downloadPdf()">Download Catalog Page</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-offset-4 col-sm-8">
+        <button type="button" class="btn" id="download-all" name="downloadAll" (click)="downloadAllPdf()" disabled="true">Download Entire Catalog</button>
+      </div>
+    </div>
+  </div>
+</form>

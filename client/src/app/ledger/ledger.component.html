@@ -1,0 +1,128 @@
+<form class="form-horizontal selectable-component centered" id="ledger" style="width:25em">
+  <!-- New Borrower Registration -->
+  <div class='button-stack'>
+    <button type="button" id="add" name="add" class="btn btn-info centered" data-toggle="collapse" data-target="#new-borrower" (click)="toggleNewBorrowerArea()">Register New Borrower</button>
+  </div>
+  <div class="centered">
+    <div id="new-borrower" class="collapse panel panel-default">
+      <div class="panel-body">
+        <label for="" class="col-sm-3">Name</label>
+        <div class="col-sm-9">
+          <input type="text" name="name" style="text-transform: capitalize" [(ngModel)]="newBorrower.name">
+        </div>
+      </div>
+      <div class="panel-body">
+        <label for="" class="col-sm-3">Surname</label>
+        <div class="col-sm-9">
+          <input type="text" name="surnamename" style="text-transform: capitalize" [(ngModel)]="newBorrower.surname">
+        </div>
+      </div>
+      <div class="panel-body">
+        <label for="" class="col-sm-3">Location</label>
+        <div class="col-sm-9">
+          <input type="text" name="level" style="text-transform: capitalize" [(ngModel)]="newBorrower.location">
+        </div>
+      </div>
+      <div class="panel-body">
+        <button type="button" class="btn btn-default centered" (click)="addBorrower()">Save</button>
+      </div>
+      <div class="panel-body">  
+        <span>{{borrowerMessage}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Borrower TODO
+  <div class='button-stack'>
+    <button type="button" id="update" name="update" class="btn btn-info centered" data-toggle="collapse" data-target="#update-borrower" (click)="toggleUpdateBorrowerArea()">Update Borrower's Info</button>
+  </div>
+  <div id="update-borrower" class="collapse panel panel-default" style="padding-bottom:2em">
+    <div class="panel-body">
+      <label class="col-sm-3">Name</label>
+      <div class="col-sm-9">
+    <app-borrower-picklist (borrowerSelected)="onBorrowerSelected($event)" [reset]="resetBorrowerPicklist"></app-borrower-picklist>
+      </div>
+    </div>
+
+    <!-- Visible only after borrower has been selected  
+    <div id="borrower-data" class="centered" style="display:none!important">
+        <div class="panel-body">
+          <label for="" class="col-sm-3">Name</label>
+          <div class="col-sm-9">
+            <input type="text" name="name" [(ngModel)]="selectedBorrower.name">
+          </div>
+        </div>
+        <div class="panel-body">
+          <label for="" class="col-sm-3">Surname</label>
+          <div class="col-sm-9">
+            <input type="text" name="surnamename" [(ngModel)]="selectedBorrower.surname">
+          </div>
+        </div>
+        <div class="panel-body">
+          <label for="" class="col-sm-3">Location  </label>
+          <div class="col-sm-9">
+            <input type="text" name="level" [(ngModel)]="selectedBorrower.location">
+          </div>
+        </div>
+        <div class="panel-body">
+          <button type="button" class="btn btn-default centered" (click)="updateBorrower()" data-toggle="collapse" data-target="#update-borrower">Save</button>
+        </div>        
+     </div>
+  </div>
+  -->
+  <!-- Borrow and Return -->
+  <div class='button-stack'>
+    <button type="button" id="br" name="br" class="btn btn-info centered" data-toggle="collapse" data-target="#borrow-return" (click)="toggleBorrowReturnArea()">Borrow or Return Book</button>
+  </div>
+  <div id="borrow-return" class="collapse panel panel-default" style="padding-bottom:2em">
+    <div class="panel-body">
+      <label class="col-sm-3">Name</label>
+      <div class="col-sm-9">
+        <app-borrower-picklist (borrowerSelected)="onBorrowerSelected($event)" (borrowerSelectionStarted)="onBorrowerSelectionStarted($event)" [reset]="resetBorrowerPicklist"></app-borrower-picklist>
+      </div>
+      <div class="panel-body">  
+        <span>{{loanMessage}}</span>
+      </div>
+    </div>
+
+    <!-- Visible only after borrower has been selected, and the borrower has a book on loan -->
+    <div id="borrower-status" style="display:none">
+      <div class="panel-body centered">
+        <button type="button" id="return" class="btn centered" name="return" (click)="returnBook()" data-toggle="collapse" data-target="#borrow-return">Return Book</button>
+      </div>
+    </div>
+
+    <!-- Visible only after borrower has been selected, and the borrower has no book on loan "width:15em; margin-top:20px; -->
+    <div id="select-book" class="centered" style="display:none!important">
+       <div class="panel-body">
+        <label class="control-label col-sm-3" for="xx">Catalog:</label>
+        <div class="col-sm-9">
+          <select class="form-control" id="sel1" name="catalog" [(ngModel)]="selectedCatalog" (change)="selectCatalog()" style="width:10em;">
+        <option *ngFor="let c of catalogs">
+          {{c.language}}
+        </option>
+      </select>
+        </div>
+      </div>
+      <div class="panel-body">
+        <label class="control-label col-sm-3" for="xx">Book:</label>
+        <div class="col-sm-9">
+          <select class="form-control" id="sel1" name="book" [(ngModel)]="selectedBook" (change)="selectBook()" style="width:10em;">
+        <option *ngFor="let tag of bookTags">
+          {{tag}}
+        </option>
+      </select>
+        </div>
+      </div>
+      <div class="panel-body">
+        <button type="button" id="borrow" name="borrow" class="btn centered" (click)="borrowBook()" disabled >Borrow Selected Book</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Download Ledger -->
+  <div id="download-ledger" class='button-stack' style="display:none;" >
+    <button type="button" id="dl" name="dl" class="btn btn-info centered" (click)="downloadLedger()">Download Ledger PDF</button>
+  </div>
+
+</form>

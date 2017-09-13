@@ -1,0 +1,29 @@
+<form class="form-horizontal selectable-component centered" id="new-catalog" style="width:30em">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <p>A catalog records all books of a given language.</p>
+      <p> To start a new catalog, enter the language and a prefix. All books in the catalog are identified by a tag comprising
+        the prefix followed by a number</p>
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-4" for="language">Language:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" style="text-transform: capitalize" id="language" name="language" [(ngModel)]="catalogLanguage">
+      </div>
+    </div>
+    <div class="panel-body">
+      <label class="control-label col-sm-4" for="prefix">Prefix:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" style="text-transform: uppercase" id="prefix" name="prefix" [(ngModel)]="catalogPrefix">
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-offset-4 col-sm-8">
+        <button type="button" class="btn" (click)="createCatalog()">Create Catalog</button>
+      </div>
+    </div>
+    <div class="panel-body">  
+      <span>{{message}}</span>
+    </div>
+  </div>
+</form>

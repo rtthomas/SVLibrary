@@ -1,0 +1,11 @@
+<div class="centered" >
+  <!-- Text input linked to the pick list -->
+  <div>
+    <input type="text" (keydown)="onKeydown($event)" (click) = "onClickText()" [(ngModel)]="value" class="picklist">
+  </div>
+  <!-- Pick list visible only after user starts typing -->
+  <div>
+    <select name="picker" id="picker" size="10" (click)="onClick($event)" class="picklist dropdown" style="display: none" >
+    </select>
+  </div>
+</div>
