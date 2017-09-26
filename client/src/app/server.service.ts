@@ -11,7 +11,7 @@ export class ServerService {
     console.log(document.baseURI);
     if (document.baseURI == "http://localhost:4200/"){
       // Client loaded from VSCode local server 
-      this.baseUrl ="http://localhost:8888/rest/"; 
+      this.baseUrl ="http://localhost:8080/rest/"; 
     }
     else {
       // CLient loaded from local or remote App Engine server
